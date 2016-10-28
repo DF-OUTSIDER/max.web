@@ -15,10 +15,6 @@ public class CustomRoleVoter implements AccessDecisionVoter<Object> {
         return rolePrefix;
     }
 
-    public void setRolePrefix(String rolePrefix) {
-        this.rolePrefix = rolePrefix;
-    }
-
     @Override
     public boolean supports(ConfigAttribute configAttribute) {
         return configAttribute.getAttribute() != null && configAttribute.getAttribute().startsWith(this.getRolePrefix());
