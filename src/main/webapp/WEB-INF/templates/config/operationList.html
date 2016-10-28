@@ -21,48 +21,48 @@
         <li class="active">Operation</li>
     </ol>
 
-    <form class="navbar-form navbar-left search-form" role="search" action="#" th:action="@{/config/operation/}">
-        <div class="form-group">
-            <input type="text" name="action" class="form-control" placeholder="Operation Name"
-                   th:value="${searchAction}">
-        </div>
-        <button type="submit" class="btn btn-default">Search</button>
-    </form>
-
-    <a role="button" class="btn btn-primary navbar-btn " href="#" th:href="@{/config/newOperation}">New</a>
-    <a id="delBtn" role="button" class="btn btn-danger navbar-btn " href="#">Delete</a>
-    <a id="delUrl" class="hidden" href="#" th:href="@{/config/deleteOperations}">_</a>
-
     <div class="container-fluid">
-        <div class="table-responsive">
-            <table id="operationList" class="table table-hover">
-                <thead>
-                <tr>
-                    <th>
-                        <input type="checkbox" value="selectAll" id="selectAll">
-                    </th>
-                    <th>Action</th>
-                    <th>Controller</th>
-                    <th>Remark</th>
-                    <th>#</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="op:${operationList.result}">
-                    <td>
-                        <input type="checkbox" th:value="${op.id}">
-                    </td>
-                    <td th:text="${op.action}"></td>
-                    <td th:text="${op.controller}"></td>
-                    <td th:text="${op.remark}"></td>
-                    <td>
-                        <a href="#" role="button" class="btn btn-xs btn-default"
-                           th:href="@{/config/editOperation(id=${op.id})}">Edit</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <form class="form-inline" role="form" action="#" th:action="@{/config/operation/}">
+            <div class="input-group form-group">
+                <input type="text" name="action" class="form-control" placeholder="Operation Name"
+                       th:value="${searchAction}">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default">Search</button>
+                </span>
+            </div>
+            <div class="form-group">
+                <a role="button" class="btn btn-primary" href="#" th:href="@{/config/newOperation}">New</a>
+                <a id="delBtn" role="button" class="btn btn-danger" href="#" th:href="@{/config/deleteOperations}">Delete</a>
+            </div>
+        </form>
+
+        <table id="operationList" class="table table-hover">
+            <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" value="selectAll" id="selectAll">
+                </th>
+                <th>Action</th>
+                <th>Controller</th>
+                <th>Remark</th>
+                <th>#</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="op:${operationList.result}">
+                <td>
+                    <input type="checkbox" th:value="${op.id}">
+                </td>
+                <td th:text="${op.action}"></td>
+                <td th:text="${op.controller}"></td>
+                <td th:text="${op.remark}"></td>
+                <td>
+                    <a href="#" role="button" class="btn btn-xs btn-default"
+                       th:href="@{/config/editOperation(id=${op.id})}">Edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
         <ul class="pagination pull-right"
             th:replace="share/common::pagination(${operationList.pageIndex},${operationList.pageCount},'/config/operation?action='+${searchAction})">

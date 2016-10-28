@@ -19,19 +19,20 @@
         <li class="active">User</li>
     </ol>
 
-    <form class="navbar-form navbar-left search-form" role="search" action="#" th:action="@{/config/user/}">
-        <div class="form-group">
-            <input type="text" name="action" class="form-control" placeholder="User Name"
-                   th:value="${username}">
-        </div>
-        <button type="submit" class="btn btn-default">Search</button>
-    </form>
-
-    <a role="button" class="btn btn-primary navbar-btn " href="#" th:href="@{/config/newUser}">New</a>
-    <a id="delBtn" role="button" class="btn btn-danger navbar-btn " href="#">Delete</a>
-    <a id="delUrl" class="hidden" href="#" th:href="@{/config/deleteUsers}">_</a>
-
     <div class="container-fluid">
+        <form class="form-inline" role="form" action="#" th:action="@{/config/user/}">
+            <div class="input-group form-group">
+                <input type="text" name="action" class="form-control" placeholder="User Name" th:value="${username}">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default">Search</button>
+                </span>
+            </div>
+            <div class="form-group">
+                <a role="button" class="btn btn-primary" href="#" th:href="@{/config/newUser}">New</a>
+                <a id="delBtn" role="button" class="btn btn-danger" href="#" th:href="@{/config/deleteUsers}">Delete</a>
+            </div>
+        </form>
+
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
@@ -43,6 +44,7 @@
                     <th>Role</th>
                     <th>Enabled</th>
                     <th>LastLoginTime</th>
+                    <th>#</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,6 +60,10 @@
                     </td>
                     <td th:text="${user.enabled}?'Y':'N'"></td>
                     <td th:text="${user.lastLoginTime}"></td>
+                    <th>
+                        <a role="button" class="btn btn-default btn-xs" href="#">Edit</a>
+                        <a role="button" class="btn btn-danger btn-xs" href="#">Reset</a>
+                    </th>
                 </tr>
                 </tbody>
             </table>

@@ -9,3 +9,7 @@ body {
 .search-form .form-group {
     display: inline-block;
 }
+
+a.thumbnail{
+    text-decoration: none;
+}
