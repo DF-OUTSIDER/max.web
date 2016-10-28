@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{share/layout}" th:with="index='account'">
+<head>
+    <meta charset="UTF-8" th:remove="">
+    <title>Error Page</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Permission Denied</strong> can not visit this page.
+        <th:block th:if="${#strings.length(message)} gt 0" th:text="${message}"></th:block>
+    </div>
+</th:block>
+</body>
+</html>

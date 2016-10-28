@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/share/layout}" th:with="index='config'">
+<head>
+    <meta charset="UTF-8">
+    <title>Config Home</title>
+    <link rel="stylesheet" type="text/css" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css"
+          th:remove="all">
+</head>
+<body>
+
+<th:block layout:fragment="content">
+    <hr>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                <div class="thumbnail text-center">
+                    <div class="caption">
+                        <h3>Accounts</h3>
+                        <p>
+                            Account setting
+                        </p>
+                        <p>
+                            <a href="#" class="btn btn-primary" th:href="@{/config/user}">Go</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                <div class="thumbnail text-center">
+                    <div class="caption">
+                        <h3>Roles</h3>
+                        <p>
+                            Role setting
+                        </p>
+                        <p>
+                            <a href="#" class="btn btn-primary" th:href="@{/config/role}">Go</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                <div class="thumbnail text-center">
+                    <div class="caption">
+                        <h3>Operation</h3>
+                        <p>
+                            Operation setting
+                        </p>
+                        <p>
+                            <a href="#" class="btn btn-primary" th:href="@{/config/operation}">Go</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>

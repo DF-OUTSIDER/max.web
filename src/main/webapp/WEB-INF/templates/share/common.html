@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+
+
+<ul class="pagination pull-right" th:fragment="pagination(pageIndex,pageCount,navUrl)" th:if="${pageCount ge 1}">
+    <li th:classappend="${pageIndex eq 1}?'disabled':''">
+        <a href="javascript:void(0)" th:if="${pageIndex eq 1}">&laquo;</a>
+        <a href="#" th:if="${pageIndex gt 1}" th:href="@{${navUrl}(pageIndex=1)}">&laquo;</a>
+    </li>
+    <li th:each="pageNo:${#numbers.sequence(1, pageCount)}" th:class="${pageNo eq pageIndex}?'active':''">
+        <a th:href="@{${navUrl}(pageIndex=${pageNo})}" th:text="${pageNo}"></a>
+    </li>
+    <li th:classappend="${pageIndex eq pageCount}?'disabled':''">
+        <a href="#" th:if="${pageIndex lt pageCount}" th:href="@{${navUrl}(pageIndex=${pageCount})}">&raquo;</a>
+        <a href="javascript:void(0)" th:if="${pageIndex eq pageCount}">&raquo;</a>
+    </li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">MAX</title>
+    <link rel="stylesheet" type="text/css" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css"
+          th:href="@{/lib/bootstrap/dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css"
+          href="../../../resources/bower_components/bootstrap/dist/css/bootstrap-theme.css"
+          th:href="@{/lib/bootstrap/dist/css/bootstrap-theme.min.css}">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/common.css" th:href="@{/css/common.css}">
+    <script type="text/javascript" src="../../../resources/bower_components/jquery/dist/jquery.js"
+            th:src="@{/lib/jquery/dist/jquery.min.js}"></script>
+    <script type="text/javascript" src="../../../resources/bower_components/bootstrap/dist/js/bootstrap.js"
+            th:src="@{/lib/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../../resources/js/common.js" th:src="@{/js/common.js}"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <span class="glyphicon glyphicon-globe"></span>
+        </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li th:classappend="${index=='home'}?'active':''"><a href="#" th:href="@{/}">Home</a></li>
+            <li><a href="#">Design</a></li>
+            <li><a href="#">Deploy</a></li>
+            <li th:classappend="${index=='config'}?'active':''"><a href="#" th:href="@{/config/}">Configuration</a></li>
+            <li th:classappend="${index=='monitor'}?'active':''"><a href="#" th:href="@{/system/monitor}">Monitor</a>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <th:block th:text="'Welcome: '+${#authentication.name}">Account</th:block>
+                    <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><span class="glyphicon glyphicon-inbox"></span> Email</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-new-window"></span> Chat</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Setting</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+<th:block layout:fragment="content">
+    <p>Page contents goes here</p>
+</th:block>
+
+</body>
+</html>

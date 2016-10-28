@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{share/layout}" th:with="index='config'">
+<head>
+    <title>Config - Role</title>
+    <link rel="stylesheet" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css" th:remove="all">
+</head>
+<body>
+<th:block layout:fragment="content">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#" th:href="@{/}">Home</a>
+        </li>
+        <li>
+            <a href="#" th:href="@{/config/}">Configuration</a>
+        </li>
+        <li class="active">Role</li>
+    </ol>
+
+    <form class="navbar-form navbar-left search-form" role="search" action="#" th:action="@{/config/role/}">
+        <div class="form-group">
+            <input type="text" name="action" class="form-control" placeholder="Operation Name"
+                   th:value="${roleName}">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+    </form>
+
+    <a role="button" class="btn btn-primary navbar-btn " href="#" th:href="@{/config/newRole}">New</a>
+    <a id="delBtn" role="button" class="btn btn-danger navbar-btn " href="#">Delete</a>
+    <a id="delUrl" class="hidden" href="#" th:href="@{/config/deleteRoles}">_</a>
+
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" id="selectAll" value="selectAll">
+                    </th>
+                    <th>Name</th>
+                    <th>Operations</th>
+                    <th>Remark</th>
+                    <th>#</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="r:${roles.result}">
+                    <td>
+                        <input type="checkbox" th:value="${r.id}">
+                    </td>
+                    <td th:text="${r.name}">
+                    </td>
+                    <td>
+                        <select>
+                            <option th:each="op:${r.operations}" th:value="${op.id}"
+                                    th:text="${op.action}"></option>
+                        </select>
+                    </td>
+                    <td th:text="${r.remark}"></td>
+                    <td>
+                        <a role="button" href="#" class="btn btn-xs btn-default"
+                           th:href="@{/config/editRole(id=${r.id})}">Edit</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <ul class="pagination pull-right"
+            th:replace="share/common::pagination(${roles.pageIndex},${roles.pageCount},'/config/role?roleName='+${roleName})">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+</th:block>
+</body>
+</html>

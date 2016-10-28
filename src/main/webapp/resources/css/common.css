@@ -1,0 +1,11 @@
+body {
+    margin-top: 50px;
+}
+
+.search-form {
+    clear: both;
+}
+
+.search-form .form-group {
+    display: inline-block;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{share/layout}" th:with="index='config'">
+<head>
+    <meta charset="UTF-8" th:remove="all">
+    <title>Config - User</title>
+    <link rel="stylesheet" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css" th:remove="all">
+</head>
+<body>
+
+<th:block layout:fragment="content">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#" th:href="@{/}">Home</a>
+        </li>
+        <li>
+            <a href="#" th:href="@{/config/}">Configuration</a>
+        </li>
+        <li class="active">User</li>
+    </ol>
+
+    <form class="navbar-form navbar-left search-form" role="search" action="#" th:action="@{/config/user/}">
+        <div class="form-group">
+            <input type="text" name="action" class="form-control" placeholder="User Name"
+                   th:value="${username}">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+    </form>
+
+    <a role="button" class="btn btn-primary navbar-btn " href="#" th:href="@{/config/newUser}">New</a>
+    <a id="delBtn" role="button" class="btn btn-danger navbar-btn " href="#">Delete</a>
+    <a id="delUrl" class="hidden" href="#" th:href="@{/config/deleteUsers}">_</a>
+
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" id="selectAll">
+                    </th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Enabled</th>
+                    <th>LastLoginTime</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${users.result}">
+                    <td>
+                        <input type="checkbox" th:value="${user.id}">
+                    </td>
+                    <td th:text="${user.name}"></td>
+                    <td>
+                        <select>
+                            <option th:each="r:${user.roles}" th:text="${r.name}" th:value="${r.id}"></option>
+                        </select>
+                    </td>
+                    <td th:text="${user.enabled}?'Y':'N'"></td>
+                    <td th:text="${user.lastLoginTime}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <ul class="pagination pull-right"
+            th:replace="share/common::pagination(${users.pageIndex},${users.pageCount},'/config/user?username='+${username})">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+</th:block>
+
+</body>
+</html>

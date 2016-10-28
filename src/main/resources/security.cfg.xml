@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http auto-config="false">
+        <security:access-denied-handler error-page="/account/denied"/>
+        <security:form-login login-page="/account/login/" username-parameter="username" password-parameter="password"
+                             authentication-failure-url="/account/login?error"
+                             default-target-url="/"/>
+        <security:remember-me remember-me-parameter="_spring_security_remember_me"
+                              remember-me-cookie="SPRING_SECURITY_REMEMBER_ME_COOKIE"/>
+        <security:logout logout-url="/logout/"/>
+        <security:custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="filterSecurityInterceptor"/>
+    </security:http>
+
+    <bean id="filterSecurityInterceptor"
+          class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="accessDecisionManager" ref="affirmativeBased"/>
+        <property name="securityMetadataSource" ref="filterInvocationSecurityMetadataSource"/>
+    </bean>
+
+
+    <bean id="userDetailsService" class="security.CustomUserDetailsService"/>
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <security:authentication-manager id="authenticationManager">
+        <security:authentication-provider user-service-ref="userDetailsService">
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="affirmativeBased" class="security.CustomAffirmativeBased">
+        <constructor-arg>
+            <list>
+                <bean class="security.CustomRoleVoter"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="filterInvocationSecurityMetadataSource" class="security.CustomFilterInvocationSecurityMetadataSource">
+        <constructor-arg>
+            <list>
+                <value>/lib/</value>
+                <value>/account/login/</value>
+                <value>/favicon.ico</value>
+            </list>
+        </constructor-arg>
+    </bean>
+</beans>

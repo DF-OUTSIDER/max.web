@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css"
+          th:href="@{/lib/bootstrap/dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap-theme.css"
+          th:href="@{/lib/bootstrap/dist/css/bootstrap-theme.min.css}">
+    <script type="text/javascript" src="../../../resources/bower_components/jquery/dist/jquery.js"
+            th:src="@{/lib/jquery/dist/jquery.min.js}"></script>
+    <script type="text/javascript" src="../../../resources/bower_components/bootstrap/dist/js/bootstrap.js"
+            th:src="@{/lib/bootstrap/dist/js/bootstrap.min.js}"></script>
+</head>
+<body style="margin-top: 50px;">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <span class="glyphicon glyphicon-globe"></span>
+        </a>
+    </div>
+
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Max Web</h1>
+        <p>A Java-EE project demo</p>
+        <p>
+            <a class="btn btn-primary btn-lg" data-toggle="collapse" href="#loginForm" aria-expanded="false"
+               aria-controls="loginForm">More</a>
+        </p>
+
+        <form id="loginForm" action="#" method="post" class="form-horizontal collapse" role="form"
+              th:action="@{/login}">
+            <div class="form-group">
+                <legend></legend>
+            </div>
+
+            <div class="form-group">
+                <label for="account" class="col-sm-2 control-label">Account</label>
+                <div class="col-sm-10">
+                    <input name="username" type="text" class="form-control" id="account" placeholder="Account" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input name="password" type="password" class="form-control" id="password" placeholder="Password"
+                           required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="_spring_security_remember_me"> Remember Me
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

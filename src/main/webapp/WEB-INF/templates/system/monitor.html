@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{share/layout}" th:with="index='monitor'">
+<head>
+    <meta charset="UTF-8" th:remove="all">
+    <title>System Monitor</title>
+    <script type="text/javascript" src="../../../resources/bower_components/angular/angular.js"
+                                         th:src="@{/lib/angular/angular.js}"></script>
+    <script type="text/javascript" src="../../../resources/js/systemMonitor.js" th:src="@{/js/systemMonitor.js}"></script>
+</head>
+<body ng-app="">
+
+<th:block layout:fragment="content">
+    <p>Test:<input type="text" ng-model="name"></p>
+    <h2>Hello {{name}}</h2>
+</th:block>
+</body>
+</html>
