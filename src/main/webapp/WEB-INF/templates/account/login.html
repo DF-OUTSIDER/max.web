@@ -13,24 +13,16 @@
     <script type="text/javascript" src="../../../resources/bower_components/bootstrap/dist/js/bootstrap.js"
             th:src="@{/lib/bootstrap/dist/js/bootstrap.min.js}"></script>
 </head>
-<body style="margin-top: 50px;">
+<body style="margin-top: 30px;">
+
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <span class="glyphicon glyphicon-globe"></span>
         </a>
-    </div>
 
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-        </ul>
+        <a role="button" class="btn btn-primary navbar-btn pull-right" data-toggle="collapse" href="#loginForm"
+           aria-expanded="false" aria-controls="loginForm">Sign in</a>
     </div>
 </nav>
 
@@ -38,10 +30,17 @@
     <div class="container">
         <h1>Max Web</h1>
         <p>A Java-EE project demo</p>
-        <p>
-            <a class="btn btn-primary btn-lg" data-toggle="collapse" href="#loginForm" aria-expanded="false"
-               aria-controls="loginForm">More</a>
-        </p>
+
+        <div class="alert alert-danger" th:if="${error ne null}">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Error:</strong>
+            <th:block th:text="${error}"></th:block>
+        </div>
+        <div class="alert alert-info" th:if="${logout ne null}">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Logout:</strong>
+            <th:block th:text="${logout}"></th:block>
+        </div>
 
         <form id="loginForm" action="#" method="post" class="form-horizontal collapse" role="form"
               th:action="@{/login}">
@@ -83,6 +82,13 @@
     </div>
 </div>
 
-
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <div class="container-fluid">
+        <p class="navbar-text pull-right">
+            <th:block th:text="${#dates.year(#dates.createNow())}"></th:block>
+            &copy; <strong><a href="mailto:chinadch@gmail.com">CHINADCH@GMAIL.COM</a></strong>
+        </p>
+    </div>
+</nav>
 </body>
 </html>

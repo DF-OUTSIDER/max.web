@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{share/layout}" th:with="index='account'">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" th:remove="">
-    <title>Error Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Warn</title>
+    <link rel="stylesheet" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css"
+          th:href="@{/lib/bootstrap/dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap-theme.css"
+          th:href="@{/lib/bootstrap/dist/css/bootstrap-theme.min.css}">
+    <script type="text/javascript" src="../../../resources/bower_components/jquery/dist/jquery.js"
+            th:src="@{/lib/jquery/dist/jquery.min.js}"></script>
+    <script type="text/javascript" src="../../../resources/bower_components/bootstrap/dist/js/bootstrap.js"
+            th:src="@{/lib/bootstrap/dist/js/bootstrap.min.js}"></script>
 </head>
-<body>
-<th:block layout:fragment="content">
-    <div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Permission Denied</strong> can not visit this page.
-        <th:block th:if="${#strings.length(message)} gt 0" th:text="${message}"></th:block>
+<body style="margin-top: 50px;">
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <span class="glyphicon glyphicon-globe"></span>
+        </a>
     </div>
-</th:block>
+</nav>
+
+<hr/>
+
+<div class="alert alert-danger">
+    <strong>Permission Denied:</strong> can not visit this page.
+</div>
+
 </body>
 </html>
