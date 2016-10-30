@@ -42,8 +42,8 @@
             <th:block th:text="${logout}"></th:block>
         </div>
 
-        <form id="loginForm" action="#" method="post" class="form-horizontal collapse" role="form"
-              th:action="@{/login}">
+        <form id="loginForm" action="#" method="post" th:classappend="${error eq null}?'collapse':''"
+              class="form-horizontal" role="form" th:action="@{/login}">
             <div class="form-group">
                 <legend></legend>
             </div>

@@ -225,4 +225,21 @@ public class ConfigController {
         model.addAttribute("roleList", roleService.findAllRoles());
         return "config/user";
     }
+
+    @RequestMapping("/saveUser")
+    public String saveUser(Model model,
+                           @RequestParam("id") Integer id,
+                           @RequestParam("name") String name,
+                           @RequestParam("password") String password,
+                           @RequestParam("enabled") Boolean enabled,
+                           @RequestParam("cbAdmin") Boolean bAdmin,
+                           @RequestParam(value = "roles", required = false) Integer[] roleIds) {
+        if (bAdmin) {
+
+        } else {
+
+        }
+
+        return "/config/userList";
+    }
 }
