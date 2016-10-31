@@ -39,7 +39,7 @@
                 <a href="#" th:href="@{/}">Home</a>
             </li>
             <li th:classappend="${index eq 'design'}?'active':''">
-                <a href="#">Design</a>
+                <a href="#" th:href="@{/design/index}">Design</a>
             </li>
             <li th:classappend="${index eq 'office'}?'active':''">
                 <a href="#">Office</a>
@@ -70,12 +70,20 @@
                     <th:block th:text="'Welcome: '+${#authentication.name}">Account</th:block>
                     <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><span class="glyphicon glyphicon-inbox"></span> Email</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-new-window"></span> Chat</a></li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-inbox"></span> Email<span class="badge pull-right">0</span></a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-new-window"></span> Chat
+                            <span class="badge pull-right">0</span>
+                        </a>
+                    </li>
                     <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Setting</a></li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#" onclick="return document.getElementById('logoutForm').submit();">
+                        <a href="#"
+                           onclick="return document.getElementById('logoutForm').submit();">
                             <form action="#" class="hidden" id="logoutForm" method="post"
                                   th:action="@{/account/logout}"></form>
                             <span class="glyphicon glyphicon-off"></span>
