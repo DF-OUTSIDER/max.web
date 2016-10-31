@@ -4,14 +4,15 @@
        xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <security:http>
+    <security:http auto-config="false">
         <security:access-denied-handler error-page="/account/denied"/>
         <security:form-login login-page="/account/login/" username-parameter="username" password-parameter="password"
                              authentication-failure-url="/account/login?error=1"
                              default-target-url="/"/>
         <security:remember-me remember-me-parameter="_spring_security_remember_me"
                               remember-me-cookie="SPRING_SECURITY_REMEMBER_ME_COOKIE"/>
-        <security:logout logout-url="/logout" logout-success-url="/account/login?logout=1"/>
+        <security:logout logout-url="/account/logout" logout-success-url="/account/login?logout=1"
+                         invalidate-session="true" delete-cookies="JSESSIONID"/>
         <security:custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="filterSecurityInterceptor"/>
     </security:http>
 

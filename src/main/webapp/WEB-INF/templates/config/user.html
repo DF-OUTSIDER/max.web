@@ -23,7 +23,8 @@
     </ol>
 
     <div class="container">
-        <form action="#" method="post" class="form-horizontal" role="form" th:object="${user}">
+        <form action="#" method="post" class="form-horizontal" role="form" th:object="${user}"
+              th:action="@{${actionUrl}}">
             <div class="form-group">
                 <legend th:text="${action} + ' User'">Form Title</legend>
             </div>
@@ -46,7 +47,7 @@
                 <label for="password" class="col-sm-2 control-label">Password</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="password" placeholder="Password" th:field="*{password}"
-                           disabled>
+                           readonly>
                 </div>
             </div>
 
@@ -61,23 +62,12 @@
             </div>
 
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="cbAdmin"> Administrator
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-group">
                 <label class="col-sm-2 control-label">Roles</label>
                 <div class="col-sm-10">
                     <div class="checkbox-inline" th:each="role:${roleList}">
-                        <label>
-                            <input name="roles" type="checkbox" value="" id="" th:value="${role.id}"
-                                   th:text="${role.name}">
+                        <label class="label"
+                               th:classappend="${role.name eq 'ROLE_ADMIN'}?'label-danger':'label-default'">
+                            <input name="roles" type="checkbox" value="" th:value="${role.id}" th:text="${role.name}">
                         </label>
                     </div>
                 </div>

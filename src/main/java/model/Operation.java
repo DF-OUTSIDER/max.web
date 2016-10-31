@@ -1,9 +1,6 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +23,7 @@ public class Operation implements Serializable {
         this.id = id;
     }
 
+    @Column(length = 100)
     public String getAction() {
         return action;
     }
@@ -34,6 +32,7 @@ public class Operation implements Serializable {
         this.action = action;
     }
 
+    @Column(length = 100)
     public String getController() {
         return controller;
     }
@@ -42,6 +41,7 @@ public class Operation implements Serializable {
         this.controller = controller;
     }
 
+    @Column(length = 500)
     public String getRemark() {
         return remark;
     }

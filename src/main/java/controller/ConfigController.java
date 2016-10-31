@@ -4,6 +4,7 @@ import model.Operation;
 import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -32,6 +33,9 @@ public class ConfigController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping("/")
     public String indexPage() {
@@ -230,16 +234,18 @@ public class ConfigController {
     public String saveUser(Model model,
                            @RequestParam("id") Integer id,
                            @RequestParam("name") String name,
-                           @RequestParam("password") String password,
-                           @RequestParam("enabled") Boolean enabled,
-                           @RequestParam("cbAdmin") Boolean bAdmin,
-                           @RequestParam(value = "roles", required = false) Integer[] roleIds) {
-        if (bAdmin) {
-
-        } else {
-
-        }
-
-        return "/config/userList";
+                           @RequestParam(value = "password") String password,
+                           @RequestParam(value = "enabled", defaultValue = "false") Boolean enabled,
+                           @RequestParam(value = "roles", required = false) Integer[] roleIds) throws Exception {
+        List<Role> roles = new ArrayList<>();
+        for (Integer roleId : roleIds)
+            roles.add(roleService.findRoleById(roleId));
+        User user = new User();
+        user.setName(name);
+        user.setPassword(passwordEncoder.encode(password));
+        user.setEnabled(enabled);
+        user.setRoles(roles);
+        userService.saveUser(user);
+        return "redirect:/config/user";
     }
 }

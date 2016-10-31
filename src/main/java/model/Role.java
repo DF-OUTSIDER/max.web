@@ -23,6 +23,7 @@ public class Role implements Serializable {
         this.id = id;
     }
 
+    @Column(unique = true, length = 50)
     public String getName() {
         return name;
     }
@@ -31,6 +32,7 @@ public class Role implements Serializable {
         this.name = name;
     }
 
+    @Column(length = 500)
     public String getRemark() {
         return remark;
     }

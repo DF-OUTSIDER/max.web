@@ -57,7 +57,14 @@
                     <li><a href="#"><span class="glyphicon glyphicon-new-window"></span> Chat</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Setting</a></li>
                     <li class="divider"></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+                    <li>
+                        <a href="#" onclick="return document.getElementById('logoutForm').submit();">
+                            <form action="#" class="hidden" id="logoutForm" method="post"
+                                  th:action="@{/account/logout}"></form>
+                            <span class="glyphicon glyphicon-off"></span>
+                            Logout
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

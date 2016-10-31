@@ -45,17 +45,22 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="r:${roles.result}">
+            <tr th:each="r:${roles.result}" th:classappend="${r.name ne 'ROLE_ADMIN'}?'':'danger'">
                 <td>
-                    <input type="checkbox" th:value="${r.id}">
+                    <input th:attrappend="disabled=${r.name ne 'ROLE_ADMIN'}?null:'disabled'"
+                           th:classappend="${r.name ne 'ROLE_ADMIN'}?null:'disabled'" type="checkbox"
+                           th:value="${r.id}">
                 </td>
                 <td th:text="${r.name}">
                 </td>
-                <td>
+                <td th:if="${r.name ne 'ROLE_ADMIN'}">
                     <select>
                         <option th:each="op:${r.operations}" th:value="${op.id}"
                                 th:text="${op.action}"></option>
                     </select>
+                </td>
+                <td th:if="${r.name eq 'ROLE_ADMIN'}">
+                    PermitAll()
                 </td>
                 <td th:text="${r.remark}"></td>
                 <td>
