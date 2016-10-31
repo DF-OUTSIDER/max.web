@@ -35,15 +35,32 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
-            <li th:classappend="${index=='home'}?'active':''"><a href="#" th:href="@{/}">Home</a></li>
-            <li><a href="#">Design</a></li>
-            <li><a href="#">Office</a></li>
-            <li><a href="#">Chat</a></li>
-            <li><a href="#">Cloud</a></li>
-            <li><a href="#">Email</a></li>
-            <li><a href="#">Schedule</a></li>
-            <li th:classappend="${index=='config'}?'active':''"><a href="#" th:href="@{/config/}">Configuration</a></li>
-            <li th:classappend="${index=='monitor'}?'active':''"><a href="#" th:href="@{/system/monitor}">Monitor</a>
+            <li th:classappend="${index eq 'home'}?'active':''">
+                <a href="#" th:href="@{/}">Home</a>
+            </li>
+            <li th:classappend="${index eq 'design'}?'active':''">
+                <a href="#">Design</a>
+            </li>
+            <li th:classappend="${index eq 'office'}?'active':''">
+                <a href="#">Office</a>
+            </li>
+            <li th:classappend="${index eq 'chat'}?'active':''">
+                <a href="#">Chat</a>
+            </li>
+            <li th:classappend="${index eq 'cloud'}?'active':''">
+                <a href="#">Cloud</a>
+            </li>
+            <li th:classappend="${index eq 'email'}?'active':''">
+                <a href="#">Email</a>
+            </li>
+            <li th:classappend="${index eq 'schedule'}?'active':''">
+                <a href="#">Schedule</a>
+            </li>
+            <li th:classappend="${index eq 'config'}?'active':''">
+                <a href="#" th:href="@{/config/}">Configuration</a>
+            </li>
+            <li th:classappend="${index eq 'monitor'}?'active':''">
+                <a href="#" th:href="@{/system/monitor}">Monitor</a>
             </li>
         </ul>
 
