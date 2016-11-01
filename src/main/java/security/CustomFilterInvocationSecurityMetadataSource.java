@@ -16,11 +16,13 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
     @Autowired
     private OperationService operationService;
 
-    private List<String> anonymousUrl = new ArrayList<>(0);
+    private List<String> anonymousUrl = new ArrayList<>(0); //for anonymous users
 
-    public CustomFilterInvocationSecurityMetadataSource(List<String> anonymousUrl) {
+    private List<String> authenticatedUrl = new ArrayList<>(0); //for all authenticated users
+
+    public CustomFilterInvocationSecurityMetadataSource(List<String> anonymousUrl, List<String> authenticatedUrl) {
         this.anonymousUrl = anonymousUrl;
-
+        this.authenticatedUrl = authenticatedUrl;
     }
 
     @Override
@@ -34,6 +36,15 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
                 }
             }
 
+            for (String authUrl : this.authenticatedUrl) {
+                if ((authUrl.equals("/") && requestUrl.equals("/"))) {
+                    return SecurityConfig.createList("ROLE_AUTHENTICATED");
+                } else if (!authUrl.equals("/")) {
+                    if (requestUrl.startsWith(authUrl))
+                        return SecurityConfig.createList("ROLE_AUTHENTICATED");
+                }
+            }
+
             //mapper url->roles
             if (urlCache == null)
                 urlCache = new UrlCache(operationService.findAllOperations());
@@ -41,7 +52,7 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
             List<String> roleList = new ArrayList<>();
             urlCache.getUrlCaches().keySet().stream().filter(requestUrl::startsWith).forEach(key -> roleList.addAll(urlCache.getUrlCaches().get(key)));
 
-            if (!roleList.contains("ROLE_ADMIN"))
+            if (!roleList.contains("ROLE_ADMIN")) //role_admin can access every url
                 roleList.add("ROLE_ADMIN");
 
             return SecurityConfig.createList(roleList.toArray(new String[roleList.size()])); //every one needs ADMIN role

@@ -47,7 +47,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private List<GrantedAuthority> buildUserAuthentication(List<Role> roles) {
         Set<GrantedAuthority> grantedAuthorities = roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ANONYMOUS"));
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ANONYMOUS")); //grant privilege anonymous
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_AUTHENTICATED")); //grant privilege authenticated
         return new ArrayList<>(grantedAuthorities);
     }
 }

@@ -42,12 +42,19 @@
     </bean>
 
     <bean id="filterInvocationSecurityMetadataSource" class="security.CustomFilterInvocationSecurityMetadataSource">
-        <constructor-arg>
+        <constructor-arg name="anonymousUrl">
             <list>
                 <value>/lib/</value>
                 <value>/account/login</value>
                 <value>/account/denied</value>
                 <value>/favicon.ico</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg name="authenticatedUrl">
+            <list>
+                <value>/</value>
+                <value>/js/</value>
+                <value>/css/</value>
             </list>
         </constructor-arg>
     </bean>
