@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{share/layout}" th:with="index='system'">
+      layout:decorate="~{/share/layout}" th:with="index='system'">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
@@ -10,6 +10,16 @@
 <body>
 
 <th:block layout:fragment="content">
+    <ol class="breadcrumb">
+        <li>
+            <a href="/" th:href="@{/}">Home</a>
+        </li>
+        <li>
+            <a href="/" th:href="@{/system/}">System</a>
+        </li>
+        <li class="active">Dashboard</li>
+    </ol>
+
 
 
 </th:block>

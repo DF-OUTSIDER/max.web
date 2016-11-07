@@ -252,6 +252,6 @@ public class SystemController {
 
     @RequestMapping("/dash")
     public String dashboardPage(Model model) {
-        return "dash";
+        return "system/dash";
     }
 }
