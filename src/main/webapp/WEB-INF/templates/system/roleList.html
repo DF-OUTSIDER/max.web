@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{share/layout}" th:with="index='config'">
+      layout:decorate="~{share/layout}" th:with="index='system'">
 <head>
     <title>Config - Role</title>
     <link rel="stylesheet" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css" th:remove="all">
@@ -12,13 +12,13 @@
             <a href="#" th:href="@{/}">Home</a>
         </li>
         <li>
-            <a href="#" th:href="@{/config/}">Configuration</a>
+            <a href="#" th:href="@{/system/}">System</a>
         </li>
         <li class="active">Role</li>
     </ol>
 
     <div class="container-fluid">
-        <form class="form-inline" role="form" action="#" th:action="@{/config/role/}">
+        <form class="form-inline" role="form" action="#" th:action="@{/system/role/}">
             <div class="input-group form-group">
                 <input type="text" name="action" class="form-control" placeholder="Operation Name"
                        th:value="${roleName}">
@@ -27,8 +27,8 @@
                 </span>
             </div>
             <div class="form-group">
-                <a role="button" class="btn btn-primary" href="#" th:href="@{/config/newRole}">New</a>
-                <a id="delBtn" role="button" class="btn btn-danger" href="#" th:href="@{/config/deleteRoles}">Delete</a>
+                <a role="button" class="btn btn-primary" href="#" th:href="@{/system/newRole}">New</a>
+                <a id="delBtn" role="button" class="btn btn-danger" href="#" th:href="@{/system/deleteRoles}">Delete</a>
             </div>
         </form>
 
@@ -65,14 +65,14 @@
                 <td th:text="${r.remark}"></td>
                 <td>
                     <a role="button" href="#" class="btn btn-xs btn-default"
-                       th:href="@{/config/editRole(id=${r.id})}">Edit</a>
+                       th:href="@{/system/editRole(id=${r.id})}">Edit</a>
                 </td>
             </tr>
             </tbody>
         </table>
 
         <ul class="pagination pull-right"
-            th:replace="share/common::pagination(${roles.pageIndex},${roles.pageCount},'/config/role?roleName='+${roleName})">
+            th:replace="share/common::pagination(${roles.pageIndex},${roles.pageCount},'/system/role?roleName='+${roleName})">
             <li><a href="#">&laquo;</a></li>
             <li><a href="#">1</a></li>
             <li><a href="#">2</a></li>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{share/layout}" th:with="index='config'">
+      layout:decorate="~{share/layout}" th:with="index='system'">
 <head>
     <meta charset="UTF-8" th:remove="all">
     <title th:text="'Config - User -'+${action}">Title</title>
@@ -14,10 +14,10 @@
             <a href="#" th:href="@{/}">Home</a>
         </li>
         <li>
-            <a href="#" th:href="@{/config/}">Configuration</a>
+            <a href="#" th:href="@{/system/}">System</a>
         </li>
         <li>
-            <a href="#" th:href="@{/config/user}">User</a>
+            <a href="#" th:href="@{/system/user}">User</a>
         </li>
         <li class="active" th:text="${action}+' User'"></li>
     </ol>

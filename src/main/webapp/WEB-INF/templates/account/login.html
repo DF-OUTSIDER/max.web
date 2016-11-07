@@ -42,12 +42,10 @@
             <th:block th:text="${logout}"></th:block>
         </div>
 
-        <form id="loginForm" action="#" method="post" th:classappend="${error eq null}?'collapse':''"
-              class="form-horizontal" role="form" th:action="@{/login}">
-            <div class="form-group">
-                <legend></legend>
-            </div>
+        <hr/>
 
+        <form id="loginForm" action="#" method="post" th:classappend="${error eq null}?'collapse':''"
+              class="form-horizontal col-lg-6 col-md-6" role="form" th:action="@{/login}">
             <div class="form-group">
                 <label for="account" class="col-sm-2 control-label">Account</label>
                 <div class="col-sm-10">
@@ -68,8 +66,8 @@
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-lock"></span>
                         </div>
-                    <input name="password" type="password" class="form-control" id="password" placeholder="Password"
-                           required>
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Password"
+                               required>
                     </div>
                 </div>
             </div>

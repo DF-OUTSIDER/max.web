@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{share/layout}" th:with="index='config'">
+      layout:decorate="~{share/layout}" th:with="index='system'">
 <head>
     <title th:text="'Config - Operation - ' + ${action}">Config - Operation - xx</title>
     <link rel="stylesheet" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css" th:remove="all">
@@ -13,10 +13,10 @@
             <a href="#" th:href="@{/}">Home</a>
         </li>
         <li>
-            <a href="#" th:href="@{/config/}">Configuration</a>
+            <a href="#" th:href="@{/system/}">System</a>
         </li>
         <li>
-            <a href="#" th:href="@{/config/operation}">Operation</a>
+            <a href="#" th:href="@{/system/operation}">Operation</a>
         </li>
         <li class="active" th:text="${action}+' Operation'"></li>
     </ol>

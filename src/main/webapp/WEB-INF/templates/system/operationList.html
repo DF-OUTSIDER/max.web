@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{share/layout}" th:with="index='config'">
+      layout:decorate="~{share/layout}" th:with="index='system'">
 <head>
     <title>Config - Operation</title>
     <link rel="stylesheet" type="text/css" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css"
           th:remove="all">
-    <script type="text/javascript" src="../../../resources/js/config/operation.js"
-            th:src="@{/js/config/operation.js}"></script>
 </head>
 <body>
 
@@ -16,13 +14,13 @@
             <a href="#" th:href="@{/}">Home</a>
         </li>
         <li>
-            <a href="#" th:href="@{/config/}">Configuration</a>
+            <a href="#" th:href="@{/system/}">System</a>
         </li>
         <li class="active">Operation</li>
     </ol>
 
     <div class="container-fluid">
-        <form class="form-inline" role="form" action="#" th:action="@{/config/operation/}">
+        <form class="form-inline" role="form" action="#" th:action="@{/system/operation/}">
             <div class="input-group form-group">
                 <input type="text" name="action" class="form-control" placeholder="Operation Name"
                        th:value="${searchAction}">
@@ -31,8 +29,8 @@
                 </span>
             </div>
             <div class="form-group">
-                <a role="button" class="btn btn-primary" href="#" th:href="@{/config/newOperation}">New</a>
-                <a id="delBtn" role="button" class="btn btn-danger" href="#" th:href="@{/config/deleteOperations}">Delete</a>
+                <a role="button" class="btn btn-primary" href="#" th:href="@{/system/newOperation}">New</a>
+                <a id="delBtn" role="button" class="btn btn-danger" href="#" th:href="@{/system/deleteOperations}">Delete</a>
             </div>
         </form>
 
@@ -58,14 +56,14 @@
                 <td th:text="${op.remark}"></td>
                 <td>
                     <a href="#" role="button" class="btn btn-xs btn-default"
-                       th:href="@{/config/editOperation(id=${op.id})}">Edit</a>
+                       th:href="@{/system/editOperation(id=${op.id})}">Edit</a>
                 </td>
             </tr>
             </tbody>
         </table>
 
         <ul class="pagination pull-right"
-            th:replace="share/common::pagination(${operationList.pageIndex},${operationList.pageCount},'/config/operation?action='+${searchAction})">
+            th:replace="share/common::pagination(${operationList.pageIndex},${operationList.pageCount},'/system/operation?action='+${searchAction})">
             <li><a href="#">&laquo;</a></li>
             <li><a href="#">1</a></li>
             <li><a href="#">2</a></li>
