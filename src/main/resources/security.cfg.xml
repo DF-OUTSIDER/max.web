@@ -55,6 +55,7 @@
                 <value>/</value>
                 <value>/js/</value>
                 <value>/css/</value>
+                <value>/js-src/</value>
             </list>
         </constructor-arg>
     </bean>
