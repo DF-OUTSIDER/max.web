@@ -1,49 +1,51 @@
 package service;
 
-import common.PaginationData;
-import dao.RoleDao;
 import model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import repository.RoleRepository;
 
 import java.util.List;
 
 @Service
 public class RoleServiceImpl implements RoleService {
     @Autowired
-    private RoleDao roleDao;
+    private RoleRepository roleRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Role> findAllRoles() {
-        return roleDao.findAllRoles();
+        return roleRepository.findAll();
     }
 
     @Override
-    public PaginationData<Role> findRoles(String roleName, int pageIndex, int pageSize) {
-        return roleDao.findRoles(roleName, pageIndex, pageSize);
+    @Transactional(readOnly = true)
+    public Page<Role> findRoles(String roleName, int pageIndex, int pageSize) {
+        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Pageable pageable = new PageRequest(pageIndex, pageSize, sort);
+        return roleRepository.findRoleByNameEquals(roleName, pageable);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Role findRoleById(int id) {
-        return roleDao.findRoleById(id);
+        return roleRepository.findOne(id);
     }
 
     @Override
     @Transactional
     public void saveRole(Role role) {
-        roleDao.saveRole(role);
-    }
-
-    @Override
-    @Transactional
-    public void updateRole(Role role) {
-        roleDao.updateRole(role);
+        roleRepository.save(role);
     }
 
     @Override
     @Transactional
     public void deleteRole(Role role) {
-        roleDao.deleteRole(role);
+        roleRepository.delete(role);
     }
 }

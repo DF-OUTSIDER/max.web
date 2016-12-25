@@ -47,13 +47,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="op:${operationList.result}">
+            <tr th:each="op:${operationList}">
                 <td>
-                    <input type="checkbox" th:value="${op.id}">
+                    <input type="checkbox" th:value="${op.getId()}">
                 </td>
-                <td th:text="${op.action}"></td>
-                <td th:text="${op.controller}"></td>
-                <td th:text="${op.remark}"></td>
+                <td th:text="${op.getAction()}"></td>
+                <td th:text="${op.getController()}"></td>
+                <td th:text="${op.getRemark()}"></td>
                 <td>
                     <a href="#" role="button" class="btn btn-xs btn-default"
                        th:href="@{/system/editOperation(id=${op.id})}">Edit</a>
@@ -63,7 +63,7 @@
         </table>
 
         <ul class="pagination pull-right"
-            th:replace="share/common::pagination(${operationList.pageIndex},${operationList.pageCount},'/system/operation?action='+${searchAction})">
+            th:replace="share/common::pagination(${operationList.number}+1,${operationList.totalPages},'/system/operation?action='+${searchAction})">
             <li><a href="#">&laquo;</a></li>
             <li><a href="#">1</a></li>
             <li><a href="#">2</a></li>

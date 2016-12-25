@@ -13,6 +13,7 @@ import java.util.List;
 
 public class CustomFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
     private static UrlCache urlCache;
+
     @Autowired
     private OperationService operationService;
 

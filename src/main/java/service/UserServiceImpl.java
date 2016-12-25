@@ -1,52 +1,55 @@
 package service;
 
-import common.PaginationData;
-import dao.UserDao;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     @Override
-    public PaginationData<User> findUsers(String name, int pageIndex, int pageSize) {
-        return userDao.findUsers(name, pageIndex, pageSize);
+    @Transactional(readOnly = true)
+    public Page<User> findUsers(String name, int pageIndex, int pageSize) {
+        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Pageable pageable = new PageRequest(pageIndex, pageSize, sort);
+        return userRepository.findUsers(name, pageable);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User findUserByName(String name) {
-        return userDao.findUserByName(name);
+        return userRepository.findUserByName(name);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User findUserById(int id) {
-        return userDao.findUserById(id);
+        return userRepository.findOne(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Boolean hasUser() {
-        return userDao.hasUser();
+        return userRepository.findIdCount() > 0;
     }
 
     @Override
     @Transactional
     public void saveUser(User user) {
-        userDao.saveUser(user);
-    }
-
-    @Override
-    @Transactional
-    public void updateUser(User user) {
-        userDao.updateUser(user);
+        userRepository.save(user);
     }
 
     @Override
     @Transactional
     public void deleteUser(User user) {
-        userDao.deleteUser(user);
+        userRepository.delete(user);
     }
 }

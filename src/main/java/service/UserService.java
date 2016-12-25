@@ -1,10 +1,10 @@
 package service;
 
-import common.PaginationData;
 import model.User;
+import org.springframework.data.domain.Page;
 
 public interface UserService {
-    PaginationData<User> findUsers(String name, int pageIndex, int pageSize);
+    Page<User> findUsers(String name, int pageIndex, int pageSize);
 
     User findUserById(int id);
 
@@ -13,8 +13,6 @@ public interface UserService {
     Boolean hasUser();
 
     void saveUser(User user);
-
-    void updateUser(User user);
 
     void deleteUser(User user);
 }

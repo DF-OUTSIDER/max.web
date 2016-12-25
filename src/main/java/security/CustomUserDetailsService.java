@@ -38,6 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         if (user == null)
             throw new UsernameNotFoundException("No User Found");
+
         return buildUserForAuthentication(user, buildUserAuthentication(user.getRoles()));
     }
 

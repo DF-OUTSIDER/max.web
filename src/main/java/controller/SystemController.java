@@ -46,7 +46,7 @@ public class SystemController {
     @RequestMapping("/operation")
     public String operationListPage(Model model,
                                     @RequestParam(value = "action", defaultValue = "") String action,
-                                    @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
+                                    @RequestParam(value = "pageIndex", defaultValue = "0") Integer pageIndex,
                                     @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         model.addAttribute("operationList", operationService.findOperations(action, pageIndex, pageSize));
         model.addAttribute("searchAction", action);
@@ -88,7 +88,7 @@ public class SystemController {
                                   @ModelAttribute Operation operation,
                                   BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            operationService.updateOperation(operation);
+            operationService.saveOperation(operation);
             return "redirect:/system/operation";
         } else {
             model.addAttribute("error", "CAN NOT UPDATE");
@@ -205,7 +205,7 @@ public class SystemController {
             }
         }
         role.setOperations(operations);
-        roleService.updateRole(role);
+        roleService.saveRole(role);
         return "redirect:/system/role";
     }
 
