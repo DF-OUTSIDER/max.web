@@ -25,7 +25,7 @@ import static java.util.stream.Collectors.*;
 @Controller
 @RequestMapping("/system")
 public class SystemController {
-
+    //region services
     @Autowired
     private OperationService operationService;
 
@@ -37,12 +37,14 @@ public class SystemController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    //endregion
 
     @RequestMapping("/")
     public String indexPage() {
         return "system/index";
     }
 
+    //region Operation part
     @RequestMapping("/operation")
     public String operationListPage(Model model,
                                     @RequestParam(value = "action", defaultValue = "") String action,
@@ -109,10 +111,13 @@ public class SystemController {
         return "redirect:/system/operation";
     }
 
+    //endregion
+
+    //region Role part
     @RequestMapping("/role")
     public String roleListPage(Model model,
                                @RequestParam(value = "roleName", defaultValue = "") String roleName,
-                               @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
+                               @RequestParam(value = "pageIndex", defaultValue = "0") Integer pageIndex,
                                @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         model.addAttribute("roleName", roleName);
         model.addAttribute("pageIndex", pageIndex);
@@ -153,13 +158,12 @@ public class SystemController {
         role.setName(name);
         role.setRemark(remark);
         if (opIds != null) {
-            List<Operation> operations = new ArrayList<>();
-            for (int i = 0; i < opIds.length; ++i) {
-                Operation op = operationService.findOperationById(opIds[i]);
+            role.setOperations(new ArrayList<>());
+            for (Integer opId : opIds) {
+                Operation op = operationService.findOperationById(opId);
                 op.getRoles().add(role);
-                operations.add(op);
+                role.getOperations().add(op);
             }
-            role.setOperations(operations);
         }
         roleService.saveRole(role);
         return "redirect:/system/role";
@@ -197,20 +201,22 @@ public class SystemController {
         Role role = roleService.findRoleById(id);
         role.setName(name);
         role.setRemark(remark);
-        List<Operation> operations = new ArrayList<>();
         if (opIds != null) {
+            role.setOperations(new ArrayList<>());
             for (int i = 0; i < opIds.length; ++i) {
                 Operation operation = operationService.findOperationById(opIds[i]);
-                operations.add(operation);
+                role.getOperations().add(operation);
             }
         }
-        role.setOperations(operations);
         roleService.saveRole(role);
         return "redirect:/system/role";
     }
 
     //// TODO: 2016/10/21 add delete roles
 
+    //endregion
+
+    //region User part
     @RequestMapping("/user")
     public String userListPage(Model model,
                                @RequestParam(name = "username", defaultValue = "") String username,
@@ -249,6 +255,8 @@ public class SystemController {
         userService.saveUser(user);
         return "redirect:/system/user";
     }
+
+    //endregion
 
     @RequestMapping("/dash")
     public String dashboardPage(Model model) {

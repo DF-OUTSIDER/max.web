@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
-    Page<Role> findRoleByNameEquals(String name, Pageable pageable);
+    Page<Role> findByNameEquals(String name, Pageable pageable);
 }

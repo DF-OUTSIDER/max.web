@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import repository.UserRepository;
 
 @Service
@@ -20,13 +21,16 @@ public class UserServiceImpl implements UserService {
     public Page<User> findUsers(String name, int pageIndex, int pageSize) {
         Sort sort = new Sort(Sort.Direction.ASC, "id");
         Pageable pageable = new PageRequest(pageIndex, pageSize, sort);
-        return userRepository.findUsers(name, pageable);
+        if (StringUtils.hasText(name))
+            return userRepository.findUserByNameContains(name, pageable);
+        else
+            return userRepository.findAll(pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
     public User findUserByName(String name) {
-        return userRepository.findUserByName(name);
+        return userRepository.findFirstUserByNameEquals(name);
     }
 
     @Override
@@ -38,7 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public Boolean hasUser() {
-        return userRepository.findIdCount() > 0;
+        return userRepository.count() > 0;
     }
 
     @Override

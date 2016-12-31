@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import repository.RoleRepository;
 
 import java.util.List;
@@ -28,7 +29,10 @@ public class RoleServiceImpl implements RoleService {
     public Page<Role> findRoles(String roleName, int pageIndex, int pageSize) {
         Sort sort = new Sort(Sort.Direction.ASC, "id");
         Pageable pageable = new PageRequest(pageIndex, pageSize, sort);
-        return roleRepository.findRoleByNameEquals(roleName, pageable);
+        if (StringUtils.hasText(roleName))
+            return roleRepository.findByNameEquals(roleName, pageable);
+        else
+            return roleRepository.findAll(pageable);
     }
 
     @Override

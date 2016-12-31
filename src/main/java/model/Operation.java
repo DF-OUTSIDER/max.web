@@ -58,4 +58,26 @@ public class Operation implements Serializable {
     public void setRoles(List<Role> role) {
         this.roles = role;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Operation operation = (Operation) o;
+
+        if (id != operation.id) return false;
+        if (action != null ? !action.equals(operation.action) : operation.action != null) return false;
+        if (controller != null ? !controller.equals(operation.controller) : operation.controller != null) return false;
+        return remark != null ? remark.equals(operation.remark) : operation.remark == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (action != null ? action.hashCode() : 0);
+        result = 31 * result + (controller != null ? controller.hashCode() : 0);
+        result = 31 * result + (remark != null ? remark.hashCode() : 0);
+        return result;
+    }
 }

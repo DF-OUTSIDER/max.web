@@ -45,13 +45,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="r:${roles.result}" th:classappend="${r.name ne 'ROLE_ADMIN'}?'':'danger'">
+            <tr th:each="r:${roles.content}" th:classappend="${r.getName() ne 'ROLE_ADMIN'}?'':'danger'">
                 <td>
-                    <input th:attrappend="disabled=${r.name ne 'ROLE_ADMIN'}?null:'disabled'"
-                           th:classappend="${r.name ne 'ROLE_ADMIN'}?null:'disabled'" type="checkbox"
-                           th:value="${r.id}">
+                    <input th:attrappend="disabled=${r.getName() ne 'ROLE_ADMIN'}?null:'disabled'"
+                           th:classappend="${r.getName() ne 'ROLE_ADMIN'}?null:'disabled'" type="checkbox"
+                           th:value="${r.getId()}">
                 </td>
-                <td th:text="${r.name}">
+                <td th:text="${r.getName()}">
                 </td>
                 <td th:if="${r.name ne 'ROLE_ADMIN'}">
                     <select>
@@ -72,7 +72,7 @@
         </table>
 
         <ul class="pagination pull-right"
-            th:replace="share/common::pagination(${roles.pageIndex},${roles.pageCount},'/system/role?roleName='+${roleName})">
+            th:replace="share/common::pagination(${roles},'/system/role?roleName='+${roleName})">
             <li><a href="#">&laquo;</a></li>
             <li><a href="#">1</a></li>
             <li><a href="#">2</a></li>

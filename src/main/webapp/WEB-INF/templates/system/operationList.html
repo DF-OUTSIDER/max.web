@@ -63,7 +63,7 @@
         </table>
 
         <ul class="pagination pull-right"
-            th:replace="share/common::pagination(${operationList.number}+1,${operationList.totalPages},'/system/operation?action='+${searchAction})">
+            th:replace="share/common::pagination(${operationList},'/system/operation?action='+${searchAction})">
             <li><a href="#">&laquo;</a></li>
             <li><a href="#">1</a></li>
             <li><a href="#">2</a></li>

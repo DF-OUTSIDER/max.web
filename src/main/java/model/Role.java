@@ -41,7 +41,7 @@ public class Role implements Serializable {
         this.remark = remark;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "Role_Operation",
             joinColumns = {@JoinColumn(name = "role_id")},
             inverseJoinColumns = {@JoinColumn(name = "operation_id")})
@@ -60,5 +60,25 @@ public class Role implements Serializable {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Role role = (Role) o;
+
+        if (id != role.id) return false;
+        if (name != null ? !name.equals(role.name) : role.name != null) return false;
+        return remark != null ? remark.equals(role.remark) : role.remark == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (remark != null ? remark.hashCode() : 0);
+        return result;
     }
 }
