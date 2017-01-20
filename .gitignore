@@ -9,3 +9,5 @@ out
 gen
 target
 /src/main/webapp/resources/js/
+/src/main/resources/database.properties
+/src/main/resources/rebel.xml

@@ -16,8 +16,7 @@ public class User implements Serializable {
     private List<Role> roles = new ArrayList<>();
 
     public User() {
-        //// TODO: 2016/10/21  auto generate password
-        this.password = "123456";
+        this.password = "123456"; //default password
     }
 
     @Id
@@ -64,7 +63,7 @@ public class User implements Serializable {
         this.lastLoginTime = lastLoginTime;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "User_Role",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})

@@ -30,16 +30,12 @@
             </div>
             <div class="form-group">
                 <a role="button" class="btn btn-primary" href="#" th:href="@{/system/newOperation}">New</a>
-                <a id="delBtn" role="button" class="btn btn-danger" href="#" th:href="@{/system/deleteOperations}">Delete</a>
             </div>
         </form>
 
         <table id="operationList" class="table table-hover">
             <thead>
             <tr>
-                <th>
-                    <input type="checkbox" value="selectAll" id="selectAll">
-                </th>
                 <th>Action</th>
                 <th>Controller</th>
                 <th>Remark</th>
@@ -48,15 +44,14 @@
             </thead>
             <tbody>
             <tr th:each="op:${operationList}">
-                <td>
-                    <input type="checkbox" th:value="${op.getId()}">
-                </td>
-                <td th:text="${op.getAction()}"></td>
-                <td th:text="${op.getController()}"></td>
-                <td th:text="${op.getRemark()}"></td>
+                <td th:text="${op.action}"></td>
+                <td th:text="${op.controller}"></td>
+                <td th:text="${op.remark}"></td>
                 <td>
                     <a href="#" role="button" class="btn btn-xs btn-default"
                        th:href="@{/system/editOperation(id=${op.id})}">Edit</a>
+                    <a href="#" role="button" class="btn btn-xs btn-danger"
+                       th:href="@{/system/deleteOperation(id=${op.id})}">Delete</a>
                 </td>
             </tr>
             </tbody>

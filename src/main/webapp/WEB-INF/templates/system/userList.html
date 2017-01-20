@@ -48,7 +48,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="user:${users.result}">
+                <tr th:each="user:${users.content}">
                     <td>
                         <input type="checkbox" th:value="${user.id}">
                     </td>
@@ -70,7 +70,7 @@
         </div>
 
         <ul class="pagination pull-right"
-            th:replace="share/common::pagination(${users.pageIndex},${users.pageCount},'/system/user?username='+${username})">
+            th:replace="share/common::pagination(${users},'/system/user?username='+${username})">
             <li><a href="#">&laquo;</a></li>
             <li><a href="#">1</a></li>
             <li><a href="#">2</a></li>

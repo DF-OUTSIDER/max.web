@@ -45,13 +45,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="r:${roles.content}" th:classappend="${r.getName() ne 'ROLE_ADMIN'}?'':'danger'">
+            <tr th:each="r:${roles}" th:classappend="${r.name ne 'ROLE_ADMIN'}?'':'danger'">
                 <td>
-                    <input th:attrappend="disabled=${r.getName() ne 'ROLE_ADMIN'}?null:'disabled'"
-                           th:classappend="${r.getName() ne 'ROLE_ADMIN'}?null:'disabled'" type="checkbox"
-                           th:value="${r.getId()}">
+                    <input th:attrappend="disabled=${r.name ne 'ROLE_ADMIN'}?null:'disabled'"
+                           th:classappend="${r.name ne 'ROLE_ADMIN'}?null:'disabled'" type="checkbox"
+                           th:value="${r.id}">
                 </td>
-                <td th:text="${r.getName()}">
+                <td th:text="${r.name}">
                 </td>
                 <td th:if="${r.name ne 'ROLE_ADMIN'}">
                     <select>
