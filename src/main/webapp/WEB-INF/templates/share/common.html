@@ -7,6 +7,8 @@
 </head>
 <body>
 
+<!--https://github.com/esimakin/twbs-pagination/blob/master/jquery.twbsPagination.js-->
+
 <!--/*@thymesVar id="page" type="org.springframework.data.domain.Page"*/-->
 <div class="row" th:fragment="pagination(page,url)">
     <div class="col-sm-6" th:with="currentPageRange=${(page.getNumber()+1)*page.getSize()}">
@@ -17,22 +19,24 @@
     </div>
     <div class="col-sm-6">
         <ul class="pagination pull-right">
-            <li th:classappend="${page.isFirst()}?'disabled':''">
-                <a th:unless="${page.isFirst()}" th:href='@{${url}(pageIndex=0,pageSize=${page.getSize()})}'>
+            <li th:classappend="${page.hasPrevious()}?'':'disabled'">
+                <a th:if="${page.hasPrevious()}"
+                   th:href='@{${url}(pageIndex= ${page.getNumber()-1},pageSize=${page.getSize()})}'>
                     &laquo;
                 </a>
-                <a th:if="${page.isFirst()}">&laquo;</a>
+                <a th:unless="${page.hasPrevious()}">&laquo;</a>
             </li>
             <li th:each="item:${#numbers.sequence(1,page.getTotalPages())}"
-                th:classappend="${item==(page.getNumber()+1)}? 'active' : ''">
+                th:with="currentPageIndex=${page.getNumber()+1}"
+                th:classappend="${item==currentPageIndex}? 'active' : ''">
                 <a href="#" th:href="@{${url}(pageIndex=${item-1},pageSize=${page.getSize()})}" th:text="${item}">1</a>
             </li>
-            <li th:classappend="${page.isLast()}? 'disabled' : ''">
-                <a th:unless="${page.isLast()}"
-                   th:href='@{${url}(pageIndex=${page.getTotalPages() - 1},pageSize=${page.getSize()})}'>
+            <li th:classappend="${page.hasNext()}? '' : 'disabled'">
+                <a th:if="${page.hasNext()}"
+                   th:href='@{${url}(pageIndex=${page.getNumber() + 1},pageSize=${page.getSize()})}'>
                     &raquo;
                 </a>
-                <a th:if="${page.isLast()}">
+                <a th:unless="${page.hasNext()}">
                     &raquo;
                 </a>
             </li>
