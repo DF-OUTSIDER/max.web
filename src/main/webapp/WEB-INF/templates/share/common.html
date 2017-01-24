@@ -7,28 +7,38 @@
 </head>
 <body>
 
-
-<ul class="pagination pull-right" th:fragment="pagination(page,pageUrl)">
-    <li th:classappend="${page.isFirst()}?'disabled':''">
-        <a th:unless="${page.isFirst()}" th:href='@{${pageUrl}(pageIndex=0,pageSize=${page.getSize()})}'>
-            &laquo;
-        </a>
-        <a th:if="${page.isFirst()}">&laquo;</a>
-    </li>
-    <li th:each="item:${#numbers.sequence(1,page.getTotalPages())}"
-        th:classappend="${item==(page.getNumber()+1)}? 'active' : ''">
-        <a href="#" th:href="@{${pageUrl}(pageIndex=${item-1},pageSize=${page.getSize()})}" th:text="${item}">1</a>
-    </li>
-    <li th:classappend="${page.isLast()}? 'disabled' : ''">
-        <a th:unless="${page.isLast()}"
-           th:href='@{${pageUrl}(pageIndex=${page.getTotalPages() - 1},pageSize=${page.getSize()})}'>
-            &raquo;
-        </a>
-        <a th:if="${page.isLast()}">
-            &raquo;
-        </a>
-    </li>
-</ul>
+<!--/*@thymesVar id="page" type="org.springframework.data.domain.Page"*/-->
+<div class="row" th:fragment="pagination(page,url)">
+    <div class="col-sm-6" th:with="currentPageRange=${(page.getNumber()+1)*page.getSize()}">
+        <div th:text="'Showing '+ ${page.getNumber()*page.getSize()+1}
+                                +' to '
+                                + ${currentPageRange gt page.getTotalElements()?page.getTotalElements():currentPageRange}
+                                +' of ' +${page.getTotalElements()}+' items'"></div>
+    </div>
+    <div class="col-sm-6">
+        <ul class="pagination pull-right">
+            <li th:classappend="${page.isFirst()}?'disabled':''">
+                <a th:unless="${page.isFirst()}" th:href='@{${url}(pageIndex=0,pageSize=${page.getSize()})}'>
+                    &laquo;
+                </a>
+                <a th:if="${page.isFirst()}">&laquo;</a>
+            </li>
+            <li th:each="item:${#numbers.sequence(1,page.getTotalPages())}"
+                th:classappend="${item==(page.getNumber()+1)}? 'active' : ''">
+                <a href="#" th:href="@{${url}(pageIndex=${item-1},pageSize=${page.getSize()})}" th:text="${item}">1</a>
+            </li>
+            <li th:classappend="${page.isLast()}? 'disabled' : ''">
+                <a th:unless="${page.isLast()}"
+                   th:href='@{${url}(pageIndex=${page.getTotalPages() - 1},pageSize=${page.getSize()})}'>
+                    &raquo;
+                </a>
+                <a th:if="${page.isLast()}">
+                    &raquo;
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
 
 </body>
 </html>
