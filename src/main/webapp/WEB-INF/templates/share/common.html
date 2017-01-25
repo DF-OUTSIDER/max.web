@@ -7,8 +7,6 @@
 </head>
 <body>
 
-<!--https://github.com/esimakin/twbs-pagination/blob/master/jquery.twbsPagination.js-->
-
 <!--/*@thymesVar id="page" type="org.springframework.data.domain.Page"*/-->
 <div class="row" th:fragment="pagination(page,url)">
     <div class="col-sm-6" th:with="currentPageRange=${(page.getNumber()+1)*page.getSize()}">
@@ -26,10 +24,17 @@
                 </a>
                 <a th:unless="${page.hasPrevious()}">&laquo;</a>
             </li>
-            <li th:each="item:${#numbers.sequence(1,page.getTotalPages())}"
-                th:with="currentPageIndex=${page.getNumber()+1}"
-                th:classappend="${item==currentPageIndex}? 'active' : ''">
-                <a href="#" th:href="@{${url}(pageIndex=${item-1},pageSize=${page.getSize()})}" th:text="${item}">1</a>
+            <li th:each="itemIndex:${#numbers.sequence(1,page.getTotalPages())}"
+                th:classappend="${itemIndex eq (page.getNumber()+1 )?'active':''}
+                    + ' '
+                    + (${(itemIndex &lt; 3) or (itemIndex &gt; page.getTotalPages()-2) or (itemIndex - page.getNumber() &gt; -2 and itemIndex - page.getNumber() &lt; 4)}?'':'disabled')"
+                >
+                <a href="#" th:href="@{${url}(pageIndex=(${itemIndex}-1),pageSize=${page.getSize()})}"
+                   th:if="${(itemIndex &lt; 3) or (itemIndex &gt; page.getTotalPages()-2) or (itemIndex - page.getNumber() &gt; -2 and itemIndex - page.getNumber() &lt; 4)}"
+                   th:text="${itemIndex}">1</a>
+                <a href="#" th:if="${(itemIndex &gt; 2) and (itemIndex &lt; page.getTotalPages()-2) and ((itemIndex - page.getNumber() eq -2) or (itemIndex - page.getNumber() eq 4))}">
+                    ...
+                </a>
             </li>
             <li th:classappend="${page.hasNext()}? '' : 'disabled'">
                 <a th:if="${page.hasNext()}"
