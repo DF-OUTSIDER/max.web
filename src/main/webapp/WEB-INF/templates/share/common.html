@@ -17,31 +17,48 @@
     </div>
     <div class="col-sm-6">
         <ul class="pagination pull-right">
-            <li th:classappend="${page.hasPrevious()}?'':'disabled'">
-                <a th:if="${page.hasPrevious()}"
-                   th:href='@{${url}(pageIndex= ${page.getNumber()-1},pageSize=${page.getSize()})}'>
+            <li title="First Page" th:classappend="${page.hasPrevious()}?'':'disabled'">
+                <a href="#" th:if="${page.hasPrevious()}" th:href="@{${url}(pageIndex=0,pageSize= ${page.getSize()})}">
                     &laquo;
                 </a>
-                <a th:unless="${page.hasPrevious()}">&laquo;</a>
+                <a href="#" th:unless="${page.hasPrevious()}">
+                    &laquo;
+                </a>
+            </li>
+            <li title="Prev Page" th:classappend="${page.hasPrevious()}?'':'disabled'">
+                <a th:if="${page.hasPrevious()}"
+                   th:href="@{${url}(pageIndex= ${page.getNumber()-1},pageSize=${page.getSize()})}">
+                    &lsaquo;
+                </a>
+                <a th:unless="${page.hasPrevious()}">&lsaquo;</a>
             </li>
             <li th:each="itemIndex:${#numbers.sequence(1,page.getTotalPages())}"
                 th:classappend="${itemIndex eq (page.getNumber()+1 )?'active':''}
                     + ' '
                     + (${(itemIndex &lt; 3) or (itemIndex &gt; page.getTotalPages()-2) or (itemIndex - page.getNumber() &gt; -2 and itemIndex - page.getNumber() &lt; 4)}?'':'disabled')"
-                >
+            >
                 <a href="#" th:href="@{${url}(pageIndex=(${itemIndex}-1),pageSize=${page.getSize()})}"
                    th:if="${(itemIndex &lt; 3) or (itemIndex &gt; page.getTotalPages()-2) or (itemIndex - page.getNumber() &gt; -2 and itemIndex - page.getNumber() &lt; 4)}"
                    th:text="${itemIndex}">1</a>
-                <a href="#" th:if="${(itemIndex &gt; 2) and (itemIndex &lt; page.getTotalPages()-2) and ((itemIndex - page.getNumber() eq -2) or (itemIndex - page.getNumber() eq 4))}">
+                <a href="#"
+                   th:if="${(itemIndex &gt; 2) and (itemIndex &lt; page.getTotalPages()-2) and ((itemIndex - page.getNumber() eq -2) or (itemIndex - page.getNumber() eq 3))}">
                     ...
                 </a>
             </li>
-            <li th:classappend="${page.hasNext()}? '' : 'disabled'">
+            <li title="Next Page" th:classappend="${page.hasNext()}? '' : 'disabled'">
                 <a th:if="${page.hasNext()}"
                    th:href='@{${url}(pageIndex=${page.getNumber() + 1},pageSize=${page.getSize()})}'>
-                    &raquo;
+                    &rsaquo;
                 </a>
                 <a th:unless="${page.hasNext()}">
+                    &rsaquo;
+                </a>
+            </li>
+            <li title="Last Page" th:classappend="${page.hasNext()}?'':'disabled'">
+                <a href="#" th:if="${page.hasNext()}" th:href="@{${url}(pageIndex=${page.getTotalPages()-1},pageSize=${page.getSize()})}">
+                    &raquo;
+                </a>
+                <a href="#" th:unless="${page.hasNext()}">
                     &raquo;
                 </a>
             </li>
