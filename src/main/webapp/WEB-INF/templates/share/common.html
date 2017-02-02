@@ -15,7 +15,7 @@
                                 + ${currentPageRange gt page.getTotalElements()?page.getTotalElements():currentPageRange}
                                 +' of ' +${page.getTotalElements()}+' items'"></div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6 hidden-sm hidden-xs">
         <ul class="pagination pull-right">
             <li title="First Page" th:classappend="${page.hasPrevious()}?'':'disabled'">
                 <a href="#" th:if="${page.hasPrevious()}" th:href="@{${url}(pageIndex=0,pageSize= ${page.getSize()})}">
@@ -55,7 +55,8 @@
                 </a>
             </li>
             <li title="Last Page" th:classappend="${page.hasNext()}?'':'disabled'">
-                <a href="#" th:if="${page.hasNext()}" th:href="@{${url}(pageIndex=${page.getTotalPages()-1},pageSize=${page.getSize()})}">
+                <a href="#" th:if="${page.hasNext()}"
+                   th:href="@{${url}(pageIndex=${page.getTotalPages()-1},pageSize=${page.getSize()})}">
                     &raquo;
                 </a>
                 <a href="#" th:unless="${page.hasNext()}">
@@ -63,6 +64,28 @@
                 </a>
             </li>
         </ul>
+    </div>
+    <div class="col-sm-6 hidden-lg hidden-md">
+        <nav aria-label="...">
+            <ul class="pager">
+                <li class="previous" th:classappend="${page.hasPrevious()}?'':'disabled'">
+                    <a th:if="${page.hasPrevious()}" href="#"
+                       th:href="@{${url}(pageIndex= ${page.getNumber()-1},pageSize=${page.getSize()})}">
+                        <span aria-hidden="true">&lsaquo;</span> Prev
+                    </a>
+                    <a th:unless="${page.hasPrevious()}" href="#"><span aria-hidden="true">&lsaquo;</span> Prev</a>
+                </li>
+                <li class="next" th:classappend="${page.hasNext()}?'':'disabled'">
+                    <a th:if="${page.hasNext()}"
+                       th:href='@{${url}(pageIndex=${page.getNumber() + 1},pageSize=${page.getSize()})}'>
+                        Next <span aria-hidden="true">&rsaquo;</span>
+                    </a>
+                    <a th:unless="${page.hasNext()}" href="#">
+                        Next <span aria-hidden="true">&rsaquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
 
