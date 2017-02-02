@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
     <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">MAX</title>
     <link rel="icon" href="../../../resources/images/favicon.ico" th:href="@{/images/favicon.ico}">
     <link rel="stylesheet" type="text/css" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css"
@@ -15,6 +15,8 @@
             th:src="@{/lib/jquery/dist/jquery.min.js}"></script>
     <script type="text/javascript" src="../../../resources/bower_components/bootstrap/dist/js/bootstrap.js"
             th:src="@{/lib/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../../../resources/bower_components/bootbox.js/bootbox.js"
+            th:src="@{/lib/bootbox.js/bootbox.js}"></script>
     <script type="text/javascript" src="../../resources/js/common.js" th:src="@{/js/common.js}"></script>
 </head>
 <body>
@@ -84,7 +86,7 @@
                     <li class="divider"></li>
                     <li>
                         <a href="#"
-                           onclick="return document.getElementById('logoutForm').submit();">
+                           onclick="return confirmLogout();">
                             <form action="#" class="hidden" id="logoutForm" method="post"
                                   th:action="@{/account/logout}"></form>
                             <span class="glyphicon glyphicon-off"></span>
