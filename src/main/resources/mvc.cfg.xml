@@ -14,6 +14,7 @@
     <mvc:resources mapping="/css/**" location="/resources/css/"/>
     <mvc:resources mapping="/images/**" location="/resources/images/"/>
     <mvc:resources mapping="/js-src/**" location="/resources/js-src/"/>
+    <mvc:resources mapping="/favicon.ico" location="/resources/images/favicon.ico" />
 
     <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/templates/"/>
