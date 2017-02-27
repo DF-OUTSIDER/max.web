@@ -8,7 +8,7 @@
 <body>
 
 <!--/*@thymesVar id="page" type="org.springframework.data.domain.Page"*/-->
-<div class="row" th:fragment="pagination(page,url)">
+<div class="row" th:fragment="pagination(page,url)" th:if="${page.getTotalPages() ge 1}">
     <div class="col-sm-6" th:with="currentPageRange=${(page.getNumber()+1)*page.getSize()}">
         <div th:text="'Showing '+ ${page.getNumber()*page.getSize()+1}
                                 +' to '
@@ -32,11 +32,10 @@
                 </a>
                 <a th:unless="${page.hasPrevious()}">&lsaquo;</a>
             </li>
-            <li th:each="itemIndex:${#numbers.sequence(1,page.getTotalPages())}"
+            <li th:each="itemIndex:${#numbers.sequence(1,page.getTotalPages(),0)}"
                 th:classappend="${itemIndex eq (page.getNumber()+1 )?'active':''}
                     + ' '
-                    + (${(itemIndex &lt; 3) or (itemIndex &gt; page.getTotalPages()-2) or (itemIndex - page.getNumber() &gt; -2 and itemIndex - page.getNumber() &lt; 4)}?'':'disabled')"
-            >
+                    + (${(itemIndex &lt; 3) or (itemIndex &gt; page.getTotalPages()-2) or (itemIndex - page.getNumber() &gt; -2 and itemIndex - page.getNumber() &lt; 4)}?'':'disabled')">
                 <a href="#" th:href="@{${url}(pageIndex=(${itemIndex}-1),pageSize=${page.getSize()})}"
                    th:if="${(itemIndex &lt; 3) or (itemIndex &gt; page.getTotalPages()-2) or (itemIndex - page.getNumber() &gt; -2 and itemIndex - page.getNumber() &lt; 4)}"
                    th:text="${itemIndex}">1</a>
