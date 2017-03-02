@@ -32,7 +32,7 @@
                 </a>
                 <a th:unless="${page.hasPrevious()}">&lsaquo;</a>
             </li>
-            <li th:each="itemIndex:${#numbers.sequence(1,page.getTotalPages(),0)}"
+            <li th:each="itemIndex:${#numbers.sequence(1,page.getTotalPages())}"
                 th:classappend="${itemIndex eq (page.getNumber()+1 )?'active':''}
                     + ' '
                     + (${(itemIndex &lt; 3) or (itemIndex &gt; page.getTotalPages()-2) or (itemIndex - page.getNumber() &gt; -2 and itemIndex - page.getNumber() &lt; 4)}?'':'disabled')">

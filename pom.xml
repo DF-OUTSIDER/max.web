@@ -25,8 +25,9 @@
     </build>
 
     <properties>
-        <spring.version>4.3.6.RELEASE</spring.version>
+        <spring.version>4.3.7.RELEASE</spring.version>
         <thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>
+        <thymeleaf.layout.version>2.2.0</thymeleaf.layout.version>
         <hibernate.version>5.2.8.Final</hibernate.version>
         <spring.security.version>4.2.1.RELEASE</spring.security.version>
     </properties>
@@ -45,7 +46,7 @@
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
-            <version>2.1.2  </version>
+            <version>${thymeleaf.layout.version}</version>
         </dependency>
 
         <dependency>
