@@ -29,7 +29,7 @@
         <thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>
         <thymeleaf.layout.version>2.2.0</thymeleaf.layout.version>
         <hibernate.version>5.2.8.Final</hibernate.version>
-        <spring.security.version>4.2.1.RELEASE</spring.security.version>
+        <spring.security.version>4.2.2.RELEASE</spring.security.version>
     </properties>
 
     <dependencies>
