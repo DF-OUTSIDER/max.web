@@ -60,7 +60,7 @@
                 <a href="#">Schedule</a>
             </li>
             <li th:classappend="${index eq 'wiki'}?'active':''">
-                <a href="#">Wiki</a>
+                <a href="#" th:href="@{/wiki/home/}">Wiki</a>
             </li>
             <li th:classappend="${index eq 'system'}?'active':''">
                 <a href="#" th:href="@{/system/}">System</a>

@@ -45,10 +45,12 @@
                 <a href="#" th:text="${pageIndex+1}"
                    th:href="@{${url}(pageIndex=${pageIndex},pageSize=${page.getSize()})}">3</a>
             </li> <!--show 3 4 5 ... when pages greater than 2 -->
-            <li th:if="${page.getTotalPages() gt page.getNumber()+5}" class="disabled">
+            <li th:if="${page.getTotalPages() gt page.getNumber()+5}"
+                th:unless="${page.getTotalPages() eq page.getNumber()+6}" class="disabled">
                 <a href="#">...</a> <!--show '...' when page index greater than total pages-3 -->
             </li>
-            <li th:if="${page.getNumber() lt page.getTotalPages()-6}">
+            <li th:if="${page.getNumber() lt page.getTotalPages()-6}"
+                th:unless="${page.getNumber()+7 eq page.getTotalPages()}">
                 <a href="#"
                    th:href="@{${url}(pageIndex=${page.getTotalPages()-2},pageSize=${page.getSize()})}"
                    th:text="${page.getTotalPages()-1}">99</a><!--prev last page -->
