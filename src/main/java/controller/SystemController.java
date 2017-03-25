@@ -220,7 +220,7 @@ public class SystemController {
     @RequestMapping("/user")
     public String userListPage(Model model,
                                @RequestParam(name = "username", defaultValue = "") String username,
-                               @RequestParam(name = "pageIndex", defaultValue = "1") int pageIndex,
+                               @RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
                                @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
         model.addAttribute("username", username);
         model.addAttribute("pageIndex", pageIndex);

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/share/layout}" th:with="index='system'">
+<head>
+    <title>Wiki</title>
+    <link rel="stylesheet" type="text/css" href="../../../resources/bower_components/bootstrap/dist/css/bootstrap.css"
+          th:remove="all">
+</head>
+<body>
+
+<th:block layout:fragment="content">
+
+    <div class="container">
+        <table class="table table-hover">
+            <tr>
+                <th>Id</th>
+                <th>TemplateName</th>
+                <th>TemplateHistory</th>
+                <th>TemplateHtml</th>
+                <th>TemplateXml</th>
+                <th>LastModifyTime</th>
+                <th>Creator</th>
+            </tr>
+            <tr th:each="t:${fileTemplates}">
+                <td th:text="${t.getId()}"></td>
+                <td th:text="${t.getTemplateName()}"></td>
+                <td th:text="${t.getTemplateHistory()}"></td>
+                <td th:text="${t.getTemplateHtml()}"></td>
+                <td th:text="${t.getTemplateXml()}"></td>
+                <td th:text="${t.getLastModifyTime()}"></td>
+                <td th:text="${t.getUser().getName()}"></td>
+            </tr>
+        </table>
+
+        <ul class="pagination" th:replace="share/common::pagination(${fileTemplates},'/wiki/home')">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+
+</th:block>
+</body>
+</html>

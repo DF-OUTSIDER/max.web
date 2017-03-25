@@ -9,62 +9,68 @@
 
 <!--/*@thymesVar id="page" type="org.springframework.data.domain.Page"*/-->
 <div class="row" th:fragment="pagination(page,url)" th:if="${page.getTotalPages() ge 1}">
-    <div class="col-sm-6" th:with="currentPageRange=${(page.getNumber()+1)*page.getSize()}">
+    <div class="col-sm-4" th:with="currentPageRange=${(page.getNumber()+1)*page.getSize()}">
         <div th:text="'Showing '+ ${page.getNumber()*page.getSize()+1}
                                 +' to '
                                 + ${currentPageRange gt page.getTotalElements()?page.getTotalElements():currentPageRange}
-                                +' of ' +${page.getTotalElements()}+' items'"></div>
+                                +' of '
+                                +${page.getTotalElements()}+' items'"></div>
     </div>
-    <div class="col-sm-6 hidden-sm hidden-xs">
+    <div class="col-sm-8 hidden-sm hidden-xs">
         <ul class="pagination pull-right">
-            <li title="First Page" th:classappend="${page.hasPrevious()}?'':'disabled'">
-                <a href="#" th:if="${page.hasPrevious()}" th:href="@{${url}(pageIndex=0,pageSize= ${page.getSize()})}">
-                    &laquo;
-                </a>
-                <a href="#" th:unless="${page.hasPrevious()}">
-                    &laquo;
-                </a>
-            </li>
             <li title="Prev Page" th:classappend="${page.hasPrevious()}?'':'disabled'">
                 <a th:if="${page.hasPrevious()}"
-                   th:href="@{${url}(pageIndex= ${page.getNumber()-1},pageSize=${page.getSize()})}">
-                    &lsaquo;
+                   th:href="@{${url}(pageIndex=${page.getNumber()-1},pageSize=${page.getSize()})}">
+                    &laquo;
                 </a>
-                <a th:unless="${page.hasPrevious()}">&lsaquo;</a>
+                <a th:unless="${page.hasPrevious()}">&laquo;</a>
             </li>
-            <li th:each="itemIndex:${#numbers.sequence(1,page.getTotalPages())}"
-                th:classappend="${itemIndex eq (page.getNumber()+1 )?'active':''}
-                    + ' '
-                    + (${(itemIndex &lt; 3) or (itemIndex &gt; page.getTotalPages()-2) or (itemIndex - page.getNumber() &gt; -2 and itemIndex - page.getNumber() &lt; 4)}?'':'disabled')">
-                <a href="#" th:href="@{${url}(pageIndex=(${itemIndex}-1),pageSize=${page.getSize()})}"
-                   th:if="${(itemIndex &lt; 3) or (itemIndex &gt; page.getTotalPages()-2) or (itemIndex - page.getNumber() &gt; -2 and itemIndex - page.getNumber() &lt; 4)}"
-                   th:text="${itemIndex}">1</a>
+
+            <li th:if="${page.getTotalPages() gt 0}" th:classappend="${page.getNumber() eq 0?'active':''}">
+                <a href="#" th:href="@{${url}(pageIndex=0,pageSize=${page.getSize()})}">1</a>
+                <!--first page: always show if contains page -->
+            </li>
+            <li th:if="${page.getTotalPages() gt 1}" th:classappend="${page.getNumber() eq 1?'active':''}">
+                <a href="#" th:href="@{${url}(pageIndex=1,pageSize=${page.getSize()})}">2</a>
+                <!--second page: always show if more than 1 page -->
+            </li>
+            <li th:if="${page.getTotalPages() gt 3 and page.getNumber() gt 3}" class="disabled">
+                <a href="#">...</a> <!--show '...' when page index greater than 4 -->
+            </li>
+            <li th:if="${page.getTotalPages() gt 2}"
+                th:each="pageIndex:${#numbers.sequence(
+                (page.getNumber() lt 2?2:(page.getNumber()-1 le 1?2:page.getNumber()-1)),
+                ((page.getTotalPages() gt page.getNumber()+4)?(page.getNumber()+4):page.getTotalPages()-1))}"
+                th:classappend="${pageIndex eq page.getNumber()?'active':''}">
+                <a href="#" th:text="${pageIndex+1}"
+                   th:href="@{${url}(pageIndex=${pageIndex},pageSize=${page.getSize()})}">3</a>
+            </li> <!--show 3 4 5 ... when pages greater than 2 -->
+            <li th:if="${page.getTotalPages() gt page.getNumber()+5}" class="disabled">
+                <a href="#">...</a> <!--show '...' when page index greater than total pages-3 -->
+            </li>
+            <li th:if="${page.getNumber() lt page.getTotalPages()-6}">
                 <a href="#"
-                   th:if="${(itemIndex &gt; 2) and (itemIndex &lt; page.getTotalPages()-2) and ((itemIndex - page.getNumber() eq -2) or (itemIndex - page.getNumber() eq 3))}">
-                    ...
-                </a>
+                   th:href="@{${url}(pageIndex=${page.getTotalPages()-2},pageSize=${page.getSize()})}"
+                   th:text="${page.getTotalPages()-1}">99</a><!--prev last page -->
             </li>
+            <li th:if="${page.getNumber() lt page.getTotalPages()-5}">
+                <a href="#"
+                   th:href="@{${url}(pageIndex=${page.getTotalPages()-1},pageSize=${page.getSize()})}"
+                   th:text="${page.getTotalPages()}">100</a> <!--last page -->
+            </li>
+
             <li title="Next Page" th:classappend="${page.hasNext()}? '' : 'disabled'">
                 <a th:if="${page.hasNext()}"
                    th:href='@{${url}(pageIndex=${page.getNumber() + 1},pageSize=${page.getSize()})}'>
-                    &rsaquo;
-                </a>
-                <a th:unless="${page.hasNext()}">
-                    &rsaquo;
-                </a>
-            </li>
-            <li title="Last Page" th:classappend="${page.hasNext()}?'':'disabled'">
-                <a href="#" th:if="${page.hasNext()}"
-                   th:href="@{${url}(pageIndex=${page.getTotalPages()-1},pageSize=${page.getSize()})}">
                     &raquo;
                 </a>
-                <a href="#" th:unless="${page.hasNext()}">
+                <a th:unless="${page.hasNext()}">
                     &raquo;
                 </a>
             </li>
         </ul>
     </div>
-    <div class="col-sm-6 hidden-lg hidden-md">
+    <div class="col-sm-8 hidden-lg hidden-md">
         <nav aria-label="...">
             <ul class="pager">
                 <li class="previous" th:classappend="${page.hasPrevious()}?'':'disabled'">

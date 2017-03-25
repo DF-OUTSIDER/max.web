@@ -14,6 +14,7 @@ public class User implements Serializable {
     private Boolean enabled;
     private Date lastLoginTime;
     private List<Role> roles = new ArrayList<>();
+    private List<FileTemplate> fileTemplates = new ArrayList<>();
 
     public User() {
         this.password = "123456"; //default password
@@ -73,6 +74,15 @@ public class User implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public List<FileTemplate> getFileTemplates() {
+        return fileTemplates;
+    }
+
+    public void setFileTemplates(List<FileTemplate> fileTemplates) {
+        this.fileTemplates = fileTemplates;
     }
 
     @Override
